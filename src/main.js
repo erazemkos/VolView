@@ -58,6 +58,8 @@ const dependencies = {
   dicomIO,
 };
 
+window.p = proxyManager;
+
 const store = createStore(dependencies);
 const widgetProvider = new WidgetProvider(store);
 

@@ -5,6 +5,7 @@ export const NO_WIDGET = -1;
 export const EPSILON = 10e-6;
 
 // instances
+// TODO split into specific files
 export const FileIOInst = Symbol('FileIO');
 export const DICOMIOInst = Symbol('DICOMIO');
 export const ProxyManagerInst = Symbol('ProxyManager');
@@ -36,6 +37,14 @@ export const SAMPLE_DATA = [
     description: '',
     url:
       'https://data.kitware.com/api/v1/item/620db4b74acac99f42e75418/download',
+    image: '',
+  },
+  {
+    name: 'ABDOMEN-MRI',
+    filename: 'ABDOMEN-MRI.zip',
+    description: '',
+    url:
+      'https://data.kitware.com/api/v1/item/620db9154acac99f42e77867/download',
     image: '',
   },
 ];

@@ -6,6 +6,7 @@ import { useVTKProxyStore } from '@src/storex/vtk-proxy';
 import { useImageStore } from '@src/storex/datasets-images';
 import { useModelStore } from '@src/storex/datasets-models';
 import vtkSourceProxy from '@kitware/vtk.js/Proxy/Core/SourceProxy';
+import { onDataDelete } from '../composables/onDataDelete';
 
 export function syncProxyManagerWithStores(proxyManager: vtkProxyManager) {
   const proxyStore = useVTKProxyStore();
@@ -27,7 +28,12 @@ export function syncProxyManagerWithStores(proxyManager: vtkProxyManager) {
     });
   }
 
-  const stopImageStoreSub = imageStore.$subscribe(() => {
+  onDataDelete((deleted) => {
+    // remove entries from the proxyStore
+    // delete proxies
+  });
+
+  imageStore.$subscribe(() => {
     if (!syncGuard) {
       syncGuard = true;
       registerSources<vtkImageData>(imageStore.idList, imageStore.dataIndex);
@@ -35,16 +41,11 @@ export function syncProxyManagerWithStores(proxyManager: vtkProxyManager) {
     }
   });
 
-  const stopModelStoreSub = modelStore.$subscribe(() => {
+  modelStore.$subscribe(() => {
     if (!syncGuard) {
       syncGuard = true;
       registerSources<vtkPolyData>(modelStore.idList, modelStore.dataIndex);
       syncGuard = false;
     }
   });
-
-  return () => {
-    stopImageStoreSub();
-    stopModelStoreSub();
-  };
 }

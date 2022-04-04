@@ -242,6 +242,10 @@ import {
   defineComponent,
   Ref,
   ref,
+  watch,
+  set,
+  del,
+  provide,
 } from '@vue/composition-api';
 
 import ResizableNavDrawer from './ResizableNavDrawer.vue';
@@ -275,6 +279,9 @@ import {
   ProxyManagerEvent,
 } from '../composables/onProxyManagerEvent';
 import { useProxyManager } from '../composables/proxyManager';
+import { useRulerToolStore } from '../store/tools/rulers';
+import { useCurrentImage } from '../composables/useCurrentImage';
+import { createRulerTool } from '../tools/ruler';
 
 export const Modules = [
   {
@@ -371,6 +378,46 @@ interface ErrorInfo {
   error: Error;
 }
 
+export const CURRENT_TOOLS = Symbol('CURRENT_TOOLS');
+
+function provideTools() {
+  const { currentImageID } = useCurrentImage();
+  const globalToolMap: Ref<Record<string, object>> = ref(Object.create(null));
+  const datasetAssoc: Ref<Record<string, string>> = ref(Object.create(null));
+
+  const rulerToolStore = useRulerToolStore();
+  const rulerIDs = computed(() => rulerToolStore.rulerIDs);
+  watch(rulerIDs, (ids) => {
+    const imageID = currentImageID.value;
+    if (!imageID) {
+      return;
+    }
+
+    // additions
+    ids.forEach((id) => {
+      if (!(id in globalToolMap.value)) {
+        set(globalToolMap.value, id, createRulerTool());
+        set(datasetAssoc.value, id, imageID);
+      }
+    });
+
+    // deletions
+  });
+
+  const currentToolMap = computed(() => {
+    const imageID = currentImageID.value;
+    const assocs = datasetAssoc.value;
+    return Object.entries(globalToolMap.value)
+      .filter(([id]) => assocs[id] === imageID)
+      .reduce<Record<string, object>>(
+        (curToolMap, [id, tool]) => ({ ...curToolMap, [id]: tool }),
+        {}
+      );
+  });
+
+  provide(CURRENT_TOOLS, currentToolMap);
+}
+
 export default defineComponent({
   name: 'App',
 
@@ -411,6 +458,10 @@ export default defineComponent({
     onProxyManagerEvent(ProxyManagerEvent.ProxyModified, () => {
       proxyManager?.autoAnimateViews();
     });
+
+    // --- tools --- //
+
+    provideTools();
 
     // --- modules --- //
 
