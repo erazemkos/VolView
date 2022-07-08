@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    
+    <v-progress-linear>indeterminate</v-progress-linear>
 
     <v-btn
       color="secondary"
