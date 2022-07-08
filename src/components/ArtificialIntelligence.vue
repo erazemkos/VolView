@@ -1,58 +1,85 @@
 <template>
   <v-container>
-    1. Run vessel segmentation: <br><br>
-    <button class="btn">
+    
+
+    <v-btn
+      color="secondary"
+      depressed
+      elevation="2"
+      outlined
+      x-large
+      min-height="170"
+      min-width="130"
+      class="rounded-xl ma-1"
+      v-b-tooltip.hover title="Click this to run MRA vessel segmentation on this case."
+    >
     <img 
     src="@src/components/icons/thumbnail_pokoncna_ozilje_mra.png"
     alt="MRA vessel segmentation"
-    class="image-fit"
-    width="200" 
-    height="140"
+    width="150" 
+    height="105"
     />
-    </button>
+    </v-btn>
 
-    <button class="btn">
+
+    <v-btn
+      color="secondary"
+      depressed
+      elevation="2"
+      outlined
+      x-large
+      min-height="170"
+      min-width="130"
+      class="rounded-xl ma-1"
+      v-b-tooltip.hover title="Click this to run CTA vessel segmentation on this case."
+    >
     <img 
     src="@src/components/icons/thumbnail_pokoncna_ozilje_cta.png"
     alt="CTA vessel segmentation"
-    class="image-fit"
-    width="200" 
-    height="140"
+    width="150" 
+    height="105"
     />
-    </button>
-    <br><br>
-    2. Run aneurysm detection and segmentation: <br><br>
-    <button class="btn">
+    </v-btn>
+    <v-btn
+      color="secondary"
+      depressed
+      elevation="2"
+      outlined
+      x-large
+      min-height="170"
+      min-width="130"
+      class="rounded-xl ma-1"
+      v-b-tooltip.hover title="Click this to run aneurysm detection on this case."
+    >
     <img 
     src="@src/components/icons/thumbnail_pokoncna_anevrizma_det.png"
-    alt="Aneurysm detection"
-    class="image-fit"
-    width="200" 
-    height="140"
+    alt="Aneurysm Detection"
+    width="150" 
+    height="105"
     />
-    </button>
-
-    <button class="btn">
+    </v-btn>
+    <v-btn
+      color="secondary"
+      depressed
+      elevation="2"
+      outlined
+      x-large
+      min-height="170"
+      min-width="130"
+      class="rounded-xl ma-1"
+      v-b-tooltip.hover title="Click this to run aneurysm segmentation on this case."
+    >
     <img 
     src="@src/components/icons/thumbnail_pokoncna_anevrizma_seg.png"
-    alt="Aneurysm segmentation"
-    class="image-fit"
-    width="200" 
-    height="140"
+    alt="Aneurysm Segmentation"
+    width="150" 
+    height="105"
     />
-    </button>
+    </v-btn>
 
   </v-container>
 </template>
 
 <style-scoped>
-.btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
 </style>
