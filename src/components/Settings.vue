@@ -11,7 +11,7 @@ import vuetify from '../plugins/vuetify';
 
 export default defineComponent({
   setup() {
-    const store = useLocalStorage<boolean>('dark', false);
+    const store = useLocalStorage<boolean>('dark', true);
 
     watchEffect(() => {
       vuetify.framework.theme.dark = store.value;
