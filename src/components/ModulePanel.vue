@@ -36,6 +36,7 @@ import DataBrowser from './DataBrowser.vue';
 import VolumeRendering from './VolumeRendering.vue';
 import Settings from './Settings.vue';
 import AnnotationsModule from './AnnotationsModule.vue';
+import ArtificialIntelligence from './ArtificialIntelligence.vue';
 
 export const Modules = [
   {
@@ -56,7 +57,7 @@ export const Modules = [
   {
     name: 'AI',
     icon: 'robot-outline',
-    component: null,
+    component: ArtificialIntelligence,
   },
   {
     name: 'Settings',

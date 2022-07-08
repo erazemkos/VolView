@@ -1,5 +1,5 @@
 {
-  "name": "VolView",
+  "name": "AvaDiagnostics",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "jszip": "3.10.0",
     "mitt": "^3.0.0",
     "pinia": "^2.0.14",
+    "python-shell": "^3.0.1",
     "vue": "2.6.14",
     "vue-toastification": "^1.7.14",
     "vuetify": "2.6.7",

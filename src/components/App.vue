@@ -3,7 +3,7 @@
     <template v-slot="{ dragHover }">
       <v-app>
         <v-app-bar app dense clipped-left>
-          <v-toolbar-title>VolView</v-toolbar-title>
+          <v-toolbar-title>AVA diagnostics</v-toolbar-title>
           <v-spacer />
           <v-btn
             text
@@ -11,7 +11,7 @@
             class="toolbar-button"
             @click="aboutBoxDialog = !aboutBoxDialog"
           >
-            <v-icon left size="32">$kitwareMark</v-icon>
+            <v-icon left size="32">$avalogoicon</v-icon>
             About
           </v-btn>
         </v-app-bar>
@@ -59,6 +59,9 @@
                       hide-details
                     >
                       <v-radio label="Axial Primary" value="AxialPrimary" />
+                      <v-radio label="Sagittal Primary" value="SagittalPrimary" />
+                      <v-radio label="Coronal Primary" value="CoronalPrimary" />
+                      <v-radio label="3D Primary" value="ThreeDPrimary" />
                       <v-radio label="Quad View" value="QuadView" />
                     </v-radio-group>
                   </v-card-text>
@@ -118,7 +121,7 @@
         </v-main>
 
         <v-dialog v-model="aboutBoxDialog" width="50%">
-          <about-box />
+           <about-box />
         </v-dialog>
 
         <v-dialog
@@ -232,6 +235,43 @@ export const Layouts: Record<string, Layout> = {
         objType: 'Layout',
         direction: LayoutDirection.H,
         items: [Views.Coronal, Views.Sagittal, Views.Three],
+      },
+    ],
+  },
+  SagittalPrimary: {
+    objType: 'Layout',
+    direction: LayoutDirection.V,
+    items: [
+      Views.Sagittal,
+      {
+        objType: 'Layout',
+        direction: LayoutDirection.H,
+        items: [Views.Axial, Views.Coronal, Views.Three],
+      },
+    ],
+  },
+  CoronalPrimary: {
+    objType: 'Layout',
+    direction: LayoutDirection.V,
+    items: [
+      Views.Coronal,
+      {
+        objType: 'Layout',
+        direction: LayoutDirection.H,
+        items: [Views.Axial, Views.Sagittal, Views.Three],
+      },
+    ],
+  },
+
+  ThreeDPrimary: {
+    objType: 'Layout',
+    direction: LayoutDirection.V,
+    items: [
+      Views.Three,
+      {
+        objType: 'Layout',
+        direction: LayoutDirection.H,
+        items: [Views.Axial, Views.Sagittal, Views.Coronal],
       },
     ],
   },

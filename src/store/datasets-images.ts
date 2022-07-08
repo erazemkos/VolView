@@ -11,6 +11,7 @@ import {
 import { removeFromArray } from '../utils';
 import { useViewConfigStore } from './view-configs';
 import { useView2DStore } from './views-2D';
+// import {PythonShell} from 'python-shell';
 
 export interface ImageMetadata {
   name: string;
@@ -42,6 +43,24 @@ interface State {
   metadata: Record<string, ImageMetadata>; // ID -> metadata
 }
 
+
+
+
+// let options = {
+//   mode: 'text',
+//   pythonPath: 'path/to/python',
+//   pythonOptions: ['-u'], // get print results in real-time
+//   scriptPath: 'path/to/my/scripts',
+//   args: ['value1', 'value2', 'value3']
+// };
+
+// PythonShell.run('my_script.py', options, function (err, results) {
+//   if (err) throw err;
+//   // results is an array consisting of messages collected during execution
+//   console.log('results: %j', results);
+// });
+
+
 export const useImageStore = defineStore('images', {
   state: (): State => ({
     idList: [],
@@ -51,6 +70,8 @@ export const useImageStore = defineStore('images', {
   actions: {
     addVTKImageData(name: string, imageData: vtkImageData) {
       const id = this.$id.nextID();
+      // Call python script, used in addVTKImageData
+
 
       this.idList.push(id);
       set(this.dataIndex, id, imageData);
